@@ -9,17 +9,20 @@ function extractListings(html) {
   const homes = [];
   homeRows.each((i, el) => {
     // scrape necessary data from each row and push to array
-    // TODO: scrape these better..
-    let id = $(el).children('td:nth-child(2)').first().text().trim();
-    let address = $($(el).children('td:nth-child(3)').first().html().replace(/<br>/g, ' ')).text().trim()
-    let price = $(el).children('td:nth-child(4)').first().text().trim();
-    let beds = $(el).children('td:nth-child(6)').first().text().trim();
-    let baths = $(el).children('td:nth-child(7)').first().text().trim();
-    let status = $(el).find('td:nth-child(5) img').first().attr('title');
-    let link = $(el).find('td:nth-child(2) a').first().attr('onclick').replace('top.location.href=\'', '').replace('\';', '');
+    // grab bidOpenDate. listings page does not have list date.
+    // new listings usually have a bidOpenDate 7 days after listing date
     let bidOpenDate = $(el).children('td:nth-child(9)').first().text().trim();
+    let isNew = moment(bidOpenDate).subtract(7, 'days').isSame(moment(), 'day')
     // only add "new" homes
-    if (status) {
+    if (isNew) {
+      // TODO: scrape these better..
+      let id = $(el).children('td:nth-child(2)').first().text().trim();
+      let address = $($(el).children('td:nth-child(3)').first().html().replace(/<br>/g, ' ')).text().trim()
+      let price = $(el).children('td:nth-child(4)').first().text().trim();
+      let beds = $(el).children('td:nth-child(6)').first().text().trim();
+      let baths = $(el).children('td:nth-child(7)').first().text().trim();
+      let status = $(el).find('td:nth-child(5) img').first().attr('title');
+      let link = $(el).find('td:nth-child(2) a').first().attr('onclick').replace('top.location.href=\'', '').replace('\';', '');
       homes.push({
         address,
         price,
@@ -69,6 +72,8 @@ function listingsTable(homes) {
 
 function mailListings(homes) {
   let messageHTML = listingsTable(homes);
+
+  // TODO: Set up a real mailer
 
   // Generate test SMTP service account from ethereal.email
   // Only needed if you don't have a real mail account for testing
