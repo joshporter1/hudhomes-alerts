@@ -20,6 +20,9 @@ service: hudhomes-alerts
 provider:
   name: aws
   runtime: nodejs6.10
+  environment:
+    MAILER_USER: ''
+    MAILER_PASS: ''
 
 # you can overwrite defaults here
 #  stage: dev
