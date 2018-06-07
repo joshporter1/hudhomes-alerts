@@ -1,0 +1,25 @@
+{
+  "name": "hudhomes-alerts",
+  "version": "1.0.0",
+  "description": "Lambda function that scrapes HUD listings for new homes and emails an alert.",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joshporter1/hudhomes-alerts.git"
+  },
+  "author": "Josh Porter <joshporter1@gmail.com> (http://j.oshporter.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joshporter1/hudhomes-alerts/issues"
+  },
+  "homepage": "https://github.com/joshporter1/hudhomes-alerts#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "cheerio": "^1.0.0-rc.2",
+    "moment": "^2.22.2",
+    "nodemailer": "^4.6.5"
+  }
+}
