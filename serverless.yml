@@ -12,4 +12,4 @@ functions:
   gethudhomes:
     handler: handler.gethudhomes
     events:
-      - schedule: rate(6 hours)
+      - schedule: cron(0 1 * * ? *)
